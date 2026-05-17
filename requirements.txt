@@ -1,0 +1,17 @@
+mysql-connector-python
+qrcode[pil]
+reportlab
+pillow
+opencv-python
+pyzbar
+requests
+# sql 1234
+# 'ticket_app'@'localhost'
+    # IDENTIFIED BY 'Nepal@2026';
+    mysql-connector-python
+qrcode[pil]
+reportlab
+pillow
+opencv-python
+pyzbar
+requests

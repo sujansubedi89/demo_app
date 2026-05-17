@@ -1,0 +1,37 @@
+# ── Python ────────────────────────────────
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ── Virtual environment ───────────────────
+venv/
+env/
+.venv/
+
+# ── Generated files (don't upload these) ──
+qrcodes/
+tickets/
+photos/
+
+# ── Sensitive config (has DB password) ────
+# We will use config.example.py instead
+# config.py
+
+# ── MySQL / Database ──────────────────────
+*.sql.bak
+*.dump
+
+# ── OS files ──────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ── IDE files ─────────────────────────────
+.vscode/
+.idea/
+*.sublime-project
+
+# ── Logs ─────────────────────────────────
+*.log
