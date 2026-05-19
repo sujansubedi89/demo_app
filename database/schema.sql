@@ -18,9 +18,17 @@ CREATE TABLE IF NOT EXISTS tourists (
     passport_number  VARCHAR(30)  NOT NULL,
     nationality      VARCHAR(50)  NOT NULL,
     photo_path       VARCHAR(255) DEFAULT NULL,
-    visa_type        VARCHAR(30)  NOT NULL,
-    vehicle_type     VARCHAR(30)  DEFAULT NULL,
-    vehicle_number   VARCHAR(20)  DEFAULT NULL,
+    -- visa_type        VARCHAR(30)  NOT NULL,
+    -- vehicle_type     VARCHAR(30)  DEFAULT NULL,
+    -- vehicle_number   VARCHAR(20)  DEFAULT NULL,
+    gender
+    country anusar ko price saarc vs FOREIGN
+    
+    dob
+    occupation
+    purpose select 3
+    area select further SELECT
+    entrypoint exit point 
     entry_date       DATE         NOT NULL,
     expiry_date      DATE         NOT NULL,
     created_by       VARCHAR(50)  NOT NULL,
