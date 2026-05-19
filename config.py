@@ -68,6 +68,7 @@ TICKET_VALIDITY_DAYS = 30
 # ── App info ──────────────────────────────
 APP_NAME    = "Nepal Tourist Ticketing System"
 APP_VERSION = "1.0"
+UI_ONLY_MODE=False
 
 # ── Debug print (remove later) ────────────
 if __name__ == "__main__":
@@ -79,3 +80,14 @@ if __name__ == "__main__":
     print("Folders exist:")
     for folder in [ASSETS_DIR, PHOTOS_DIR, TICKETS_DIR, QR_DIR]:
         print(f"  {folder} → exists={os.path.exists(folder)}")
+# USE nepal_ticketing;
+
+# -- Add officers with passwords
+# -- Password is stored as a hash (never plain text)
+# INSERT IGNORE INTO officers (username, password_hash, full_name, checkpost) VALUES
+# ('admin',   SHA2('admin123',   256), 'System Admin',      'Birgunj'),
+# ('ram',     SHA2('ram123',     256), 'Ram Sharma',        'Birgunj'),
+# ('sita',    SHA2('sita123',    256), 'Sita Thapa',        'Bhairahawa'),
+# ('hari',    SHA2('hari123',    256), 'Hari Bahadur',      'Kakarbhitta'),
+# ('sujan',   SHA2('sujan123',   256), 'Sujan',             'Mahendranagar');
+# ('krishna', SHA2('krishna123', 256), 'Krishna Pradhan',   'Dhangadhi'),

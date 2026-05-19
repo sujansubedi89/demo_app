@@ -121,7 +121,15 @@ class MainWindow:
             hover="#5B2C6F",
             col=2
         )
-
+        # Manage officers link (admin only)
+        tk.Button(
+            content,
+            text="⚙  Manage Officers / Change Password",
+            font=("Helvetica", 8),
+            bg="#1a1a2e", fg="#5D6D7E",
+            relief="flat", cursor="hand2",
+            command=self._open_officier_manager
+        ).pack(pady=(5, 0))
         # ── Stats bar ─────────────────────
         stats_frame = tk.Frame(content, bg="#16213e", pady=12)
         stats_frame.pack(fill="x", pady=(30, 0))
@@ -194,9 +202,9 @@ class MainWindow:
                 )
 
     def _open_create_ticket(self):
-        from ui.create_ticket_ui import CreateTicketWindow
+        from ui.permit_form_ui import TicketUI
         win = tk.Toplevel(self.root)
-        CreateTicketWindow(win, self.officer, self.checkpost, self._refresh_stats)
+        TicketUI(win, self.officer, self.checkpost)
 
     def _open_scanner(self):
         from ui.scanner_ui import ScannerWindow
@@ -214,3 +222,36 @@ class MainWindow:
         # Rebuild stats bar
         for widget in self.root.winfo_children():
             pass  # stats refresh handled on next open
+    def _open_officier_manager(self):
+        win=tk.Toplevel(self.root)
+        win.title("Manage Officiers")
+        win.geometry("500x400")
+        win.configure(bg="#f0f0f0")
+        tk.Label(win,text="OFFICER ACCOUNTS",
+        font=("Helvetica",13,"bold"),
+        bg="#C0392B",
+        fg="white",
+        pady=10
+        ).pack(fill="x")
+        from database.local_db import run_query
+        officiers=run_query("SELECT username,full_name,checkpost,is_active FROM officers",fetch=True
+        )or []
+        cols=("Username","Full Name","Checkpost","Active")
+        tree=ttk.Treeview(win,columns=cols,show="headings",height=12)
+        for col in cols:
+            tree.heading(col,text=col)
+            tree.column(col,width=110,anchor="center")
+            tree.pack(fill="both",expand=True,padx=15,pady=10)
+            for o in officiers:
+                tree.insert("", "end", values=(
+                    o["username"],
+                    o["full_name"],
+                    o["checkpost"],
+                    "Yes" if o["is_active"] else "No"
+                ))
+        tk.Label(
+            win,
+            text="To add officiers run insert into officiers table",
+            font=("Helvetica", 10, "italic"),
+            bg="#f0f0f0", fg="#E74C3C"
+        ).pack(pady=5)

@@ -60,4 +60,9 @@ if __name__=="__main__":
         print(f"\nCheckposts in database ({len(rows)} found):")
         for row in rows:
             print(f"  - {row['name']}  ({row['location']})")
+def verify_officer(username,password):
+    import hashlib
+    password_hash=hashlib.sha256(password.encode()).hexdigest()
+    rows=run_query("""SELECT id,username,full_name,checkpost FROM officers WHERE username=%s AND password_hash=%s AND is_active=1""",(username,password_hash),fetch=True)
+    return rows[0] if rows else None
 
