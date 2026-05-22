@@ -337,11 +337,11 @@ def generate_ticket_pdf(tourist_data, scan_history=None):
         scan_history = []
 
     ticket_number = tourist_data["ticket_number"]
-
+    # tourist_data["emergency_contact"] = emergency
     # Get/generate QR and attach to data dict for use inside blocks
     from modules.qr_generator import get_qr_path
     tourist_data["_qr_path"] = get_qr_path(ticket_number)
-
+     
     pdf_path = os.path.join(TICKETS_DIR, f"{ticket_number}.pdf")
     W, H = A4   # 595 x 842 pt
     c = canvas.Canvas(pdf_path, pagesize=A4)
@@ -361,7 +361,7 @@ def generate_ticket_pdf(tourist_data, scan_history=None):
     # Top block: main permit
     main_y = mid_y + gap
     main_h = H - page_margin - main_y
-
+    
     # Bottom block: checkpost copy
     cp_y = page_margin
     cp_h = mid_y - gap - page_margin
