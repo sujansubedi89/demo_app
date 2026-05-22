@@ -182,8 +182,7 @@ class LoginWindow:
             return
 
         # Login success
-        self._open_main(officer["full_name"], officer["checkpost"])
-
+        self._open_main(officer["full_name"], officer.get("role", "officer"))
     def _open_main(self, officer_name, checkpost):
         self.root.destroy()
         main_root = tk.Tk()

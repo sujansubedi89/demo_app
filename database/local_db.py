@@ -62,7 +62,25 @@ if __name__=="__main__":
             print(f"  - {row['name']}  ({row['location']})")
 def verify_officer(username,password):
     import hashlib
-    password_hash=hashlib.sha256(password.encode()).hexdigest()
-    rows=run_query("""SELECT id,username,full_name,checkpost FROM officers WHERE username=%s AND password_hash=%s AND is_active=1""",(username,password_hash),fetch=True)
+    password_hash=password
+    rows=run_query("""SELECT id, username, full_name, role
+FROM officers
+WHERE username=%s
+AND password_hash=%s
+AND is_active=1""",(username,password_hash),fetch=True)
     return rows[0] if rows else None
 
+# NSERT INTO officers (username, password_hash, full_name, role, checkpost_id, is_active) VALUES
+# ('admin', 'admin123', 'System Admin', 'admin', NULL, 1),
+# ('ktm_1', 'ktm1pass', 'Kathmandu Counter 1', 'issuer', 1, 1),
+# ('ktm_2', 'ktm2pass', 'Kathmandu Counter 2', 'issuer', 1, 1),
+# ('ktm_3', 'ktm3pass', 'Kathmandu Counter 3', 'issuer', 1, 1),
+# ('sim_1', 'sim1pass', 'Simpani Counter 1', 'issuer', 2, 1),
+# ('sim_2', 'sim2pass', 'Simpani Counter 2', 'issuer', 2, 1),
+# ('sim_3', 'sim3pass', 'Simpani Counter 3', 'issuer', 2, 1),
+# ('pkr_1', 'pkr1pass', 'Pokhara Counter 1', 'issuer', 3, 1),
+# ('pkr_2', 'pkr2pass', 'Pokhara Counter 2', 'issuer', 3, 1),
+# ('pkr_3', 'pkr3pass', 'Pokhara Counter 3', 'issuer', 3, 1),
+# ('gas_1', 'gas1pass', 'Gassa Counter 1', 'issuer', 4, 1),
+# ('gas_2', 'gas2pass', 'Gassa Counter 2', 'issuer', 4, 1),
+# ('gas_3', 'gas3pass', 'Gassa Counter 3', 'issuer', 4, 1);
